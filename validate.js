@@ -24,7 +24,12 @@ class Validate {
     return /^[0-9]*$/.test(val);
   };
 
-  validation = (val, types, min, max) => {
+  displayMessage = (form, message) => {
+    document.querySelector(`[data-message=${form.name}]`).innerText = message;
+  } 
+
+  validation = (form, types, min, max) => {
+    this.val = form.value;
     this.costumMessages
       ? (this.messages = this.costumMessages)
       : (this.messages = {
@@ -35,9 +40,9 @@ class Validate {
 
     this.result = {};
     this.validations = {
-      required: this.isFill(val),
-      email: this.isEmail(val),
-      number: this.isNumber(val),
+      required: this.isFill(this.val),
+      email: this.isEmail(this.val),
+      number: this.isNumber(this.val),
     };
 
     types.forEach((type) => {
@@ -47,14 +52,7 @@ class Validate {
     this.error = Object.keys(this.result).find(
       (key) => this.result[key] == false
     );
-    return this.error !== undefined ? this.messages[this.error] : null;
+    this.message = this.error !== undefined ? this.messages[this.error] : "";
+    this.displayMessage(form, this.message);
   };
 }
-
-const validate = new Validate();
-validate.setCostumMessage({
-  required: "please fill the input data",
-  email: "adad",
-});
-console.log(validate.validation("", ["required", "number"]));
-console.log(validate.validation("adad.com", ["required", "email"]));
