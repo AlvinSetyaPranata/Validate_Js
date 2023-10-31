@@ -29,7 +29,25 @@ form.addEventListener("submit", function(e) {
     }
 }
 ```
+```
 validate.validation({form.name}, [{type validation1}, {type validation2}]);
+```
+{form.name} its name attribute input in HTML 
+```
+<input type="text" name="name">
+<input type="text" name="email">
+```
+
+| Type validation   | Description   |
+|-----------|-----------|
+| required  | null  |
+| email  | null  |
+| number  | null  |
+| alphabet  | null  |
+| min:5  | null  |
+| max:13  | null  |
+
+
 ```
     if(validate.check()) {
         fetch("http://example/post", {
