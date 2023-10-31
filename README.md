@@ -8,8 +8,15 @@ This libray created using Vanilla js.
 ## Basic
 ```
 const validate = new Validate();
-const form = document.querySelector("form");
+```
+Init validate library
 
+```
+const form = document.querySelector("form");
+```
+Get Form element
+
+```
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -20,7 +27,10 @@ form.addEventListener("submit", function(e) {
         name: name,
         email: email
     }
-
+}
+```
+validate.validation({form.name}, [{type validation1}, {type validation2}]);
+```
     if(validate.check()) {
         fetch("http://example/post", {
             method: "POST",
