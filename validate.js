@@ -1,12 +1,27 @@
-class Validate {
-  constructor() {
-    this.name_domain = ["gmail.com", "yahoo.com"];
-    this.costumMessages;
+class Message {
+  constructor(min, max) {
+    this.messages = {
+      required: "This field must be filled in",
+      email: "Format email tidak benar",
+      number: "This field only accepts numbers",
+      alphabet: "This field only accepts letters",
+      max: `This field maximal ${max} characters.`,
+      min: `This field minimum ${min} characters.`}
   }
 
-  setCostumMessage = (messages) => {
-    this.costumMessages = messages;
-  };
+  setMessage = (newMessage) => {
+    Object.keys(newMessage).map(message => {
+      this.messages[message] = newMessage[message];
+    });
+  }
+}
+
+class Validate {
+  constructor(customMessage) {
+    this.customMessage = customMessage || {};
+    this.name_domain = ["gmail.com", "yahoo.com"];
+    this.errors = {};
+  }
 
   isFill = (val) => {
     return /\S+/.test(val);
@@ -24,35 +39,56 @@ class Validate {
     return /^[0-9]*$/.test(val);
   };
 
+  maxData(val, max) {
+    return val.length < max;
+  }
+
+  minData(val, min) {
+    return val.length > min;
+  }
+
   displayMessage = (form, message) => {
     document.querySelector(`[data-message=${form.name}]`).innerText = message;
-  } 
+  };
 
-  validation = (form, types, min, max) => {
+  check = () => {
+    const checks = Object.values(this.errors);
+    return checks.filter((check) => check !== undefined).length === 0;
+  };
+
+  validation = (form, types) => {
     this.val = form.value;
-    this.costumMessages
-      ? (this.messages = this.costumMessages)
-      : (this.messages = {
-          required: "Data harus diisi",
-          email: "Format email tidak benar",
-          number: "Inputan harus number",
-        });
-
     this.result = {};
     this.validations = {
       required: this.isFill(this.val),
       email: this.isEmail(this.val),
       number: this.isNumber(this.val),
+      alphabet: this.isAlphabet(this.val)
     };
 
     types.forEach((type) => {
+      if(type.includes("min")) {
+        this.min = type.split(":")[1];
+        this.result["min"] = this.minData(this.val, this.min);
+      } else if (type.includes("max")) {
+        this.max = type.split(":")[1];
+        this.result["max"] = this.maxData(this.val, this.max);
+      }
+
       this.result[type] = this.validations[type];
     });
 
     this.error = Object.keys(this.result).find(
       (key) => this.result[key] == false
     );
-    this.message = this.error !== undefined ? this.messages[this.error] : "";
+
+    const message = new Message(this.min, this.max);
+    message.setMessage(this.customMessage);
+
+    this.errors[form.name] = this.error;
+    this.message = this.error !== undefined ? message.messages[this.error] : "";
     this.displayMessage(form, this.message);
+
+    return this.val;
   };
 }
