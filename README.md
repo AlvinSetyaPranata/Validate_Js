@@ -60,3 +60,25 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
     }
 })
 ```
+```
+validate.check()
+```
+For check validation
+
+## Custom Message
+```
+const validate = new Validate(
+    {
+        required: "its custome message required",
+        number: "its custom message number"
+    }
+);
+```
+```
+new Validate(
+    {
+        name_validation: "your message"
+    }
+);
+```
+Name validation its like type name validation
