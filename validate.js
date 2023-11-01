@@ -2,7 +2,7 @@ class Message {
   constructor(min, max) {
     this.messages = {
       required: "This field must be filled in",
-      email: "Format email tidak benar",
+      email: "Email format incorrect",
       number: "This field only accepts numbers",
       alphabet: "This field only accepts letters",
       max: `This field maximal ${max} characters.`,
