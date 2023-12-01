@@ -48,6 +48,21 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
 | max:13  | null  |
 
 
+## How to Display Error Message
+```
+<div data-message="{input.name}"></div>
+```
+example:
+```
+<input type="text" name="email">
+<div data-message="email"></div>
+```
+
+## For check validation
+```
+validate.check()
+```
+example:
 ```
     if(validate.check()) {
         fetch("http://example/post", {
@@ -60,11 +75,6 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
     }
 })
 ```
-```
-validate.check()
-```
-For check validation
-
 ## Custom Message
 ```
 const validate = new Validate(
