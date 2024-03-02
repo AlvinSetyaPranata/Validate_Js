@@ -6,17 +6,17 @@ This libray created using Vanilla js.
 # How to Use
 
 ## Basic
-```
+```js
 const validate = new Validate();
 ```
 Init validate library
 
-```
+```js
 const form = document.querySelector("form");
 ```
 Get Form element
 
-```
+```js
 form.addEventListener("submit", function(e) {
     e.preventDefault();
 
@@ -29,11 +29,11 @@ form.addEventListener("submit", function(e) {
     }
 }
 ```
-```
+```js
 validate.validation({form.name}, [{type validation1}, {type validation2}]);
 ```
 {form.name} its name attribute input in HTML 
-```
+```html
 <input type="text" name="name">
 <input type="text" name="email">
 ```
@@ -49,21 +49,21 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
 
 
 ## How to Display Error Message
-```
+```html
 <div data-message="{input.name}"></div>
 ```
 example:
-```
+```html
 <input type="text" name="email">
 <div data-message="email"></div>
 ```
 
 ## For check validation
-```
+```js
 validate.check()
 ```
 example:
-```
+```js
     if(validate.check()) {
         fetch("http://example/post", {
             method: "POST",
@@ -76,7 +76,7 @@ example:
 })
 ```
 ## Custom Message
-```
+```js
 const validate = new Validate(
     {
         required: "its custome message required",
@@ -84,7 +84,7 @@ const validate = new Validate(
     }
 );
 ```
-```
+```js
 new Validate(
     {
         name_validation: "your message"
