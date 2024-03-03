@@ -17,6 +17,10 @@ class Validate {
     return val === val.toLowerCase()
   }
 
+  isUpperCase = (val) => {
+    return val === val.toUpperCase()
+  }
+
   isUrl = (url) => {
     return /^(http|ftp)s?:\/\/((?=.{3,253}$)(localhost|(([^ ]){1,63}\.[^ ]+)))$/.test(url)
   }
@@ -55,7 +59,8 @@ class Validate {
       number: this.isNumber(this.val),
       alphabet: this.isAlphabet(this.val),
       url: this.isUrl(this.val),
-      lowercase: this.isLowerCase(this.val)
+      lowercase: this.isLowerCase(this.val),
+      uppercase: this.isUpperCase(this.val),
     };
 
     types.forEach((type) => {

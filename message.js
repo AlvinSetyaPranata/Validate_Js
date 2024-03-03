@@ -8,7 +8,8 @@ class Message {
         max: `This field maximal ${max} characters.`,
         min: `This field minimum ${min} characters.`,
         url: "Url invalid",
-        lowercase: "This field must be lowercase"
+        lowercase: "This field must be lowercase",
+        uppercase: "This field must be uppercase",
       }
     }
   
