@@ -13,6 +13,10 @@ class Validate {
     return /^[a-zA-z\s]+$/.test(val);
   };
 
+  isUrl = (url) => {
+    return /^(http|ftp)s?:\/\/((?=.{3,253}$)(localhost|(([^ ]){1,63}\.[^ ]+)))$/.test(url)
+  }
+
   isEmail = (val) => {
     return this.name_domain.indexOf(val.split("@")[1]) == -1 ? false : true;
   };
@@ -45,7 +49,8 @@ class Validate {
       required: this.isFill(this.val),
       email: this.isEmail(this.val),
       number: this.isNumber(this.val),
-      alphabet: this.isAlphabet(this.val)
+      alphabet: this.isAlphabet(this.val),
+      url: this.isUrl(this.val)
     };
 
     types.forEach((type) => {

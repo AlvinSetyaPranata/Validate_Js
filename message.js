@@ -6,7 +6,9 @@ class Message {
         number: "This field only accepts numbers",
         alphabet: "This field only accepts letters",
         max: `This field maximal ${max} characters.`,
-        min: `This field minimum ${min} characters.`}
+        min: `This field minimum ${min} characters.`,
+        url: "Url invalid"
+      }
     }
   
     setMessage = (newMessage) => {

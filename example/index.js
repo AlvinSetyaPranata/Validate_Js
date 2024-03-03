@@ -16,7 +16,7 @@ form.addEventListener("submit", function(e) {
     e.preventDefault();
     let fullName = validate.validation(form.fullname, ["required", "alphabet", "min:4", "max:24"]);
     // form.fullname is name input HTML <input name="fullname"/>
-    let email = validate.validation(form.email, ["required", "email"]);
+    let email = validate.validation(form.email, ["required", "url"]);
     // form.email is name input HTML <input name="email"/>
     let password = validate.validation(form.password, ["required", "min:7"]);
     // form.password is name input HTML <input name="password"/>
