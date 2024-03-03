@@ -1,13 +1,13 @@
 // Initial library validate
 
 // Without costum message
-const validate = new Validate();
+// const validate = new Validate();
 
 // With costum message
-// const validate = new Validate({
-//     required: "costum message required",
-//     email: "costum message email"
-// });
+const validate = new Validate({
+    required: "costum message required",
+    email: "costum message email"
+});
 
 // Form 
 const form = document.getElementById("register");
