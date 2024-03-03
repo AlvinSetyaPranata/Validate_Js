@@ -7,11 +7,15 @@ class Validate {
 
   isFill = (val) => {
     return /\S+/.test(val);
-  };
+  }
 
   isAlphabet = (val) => {
     return /^[a-zA-z\s]+$/.test(val);
-  };
+  }
+  
+  isLowerCase = (val) => {
+    return val === val.toLowerCase()
+  }
 
   isUrl = (url) => {
     return /^(http|ftp)s?:\/\/((?=.{3,253}$)(localhost|(([^ ]){1,63}\.[^ ]+)))$/.test(url)
@@ -19,11 +23,11 @@ class Validate {
 
   isEmail = (val) => {
     return this.name_domain.indexOf(val.split("@")[1]) == -1 ? false : true;
-  };
+  }
 
   isNumber = (val) => {
     return /^[0-9]*$/.test(val);
-  };
+  }
 
   maxData(val, max) {
     return val.length < max;
@@ -35,12 +39,12 @@ class Validate {
 
   displayMessage = (form, message) => {
     document.querySelector(`[data-message=${form.name}]`).innerText = message;
-  };
+  }
 
   check = () => {
     const checks = Object.values(this.errors);
     return checks.filter((check) => check !== undefined).length === 0;
-  };
+  }
 
   validation = (form, types) => {
     this.val = form.value;
@@ -50,7 +54,8 @@ class Validate {
       email: this.isEmail(this.val),
       number: this.isNumber(this.val),
       alphabet: this.isAlphabet(this.val),
-      url: this.isUrl(this.val)
+      url: this.isUrl(this.val),
+      lowercase: this.isLowerCase(this.val)
     };
 
     types.forEach((type) => {
@@ -80,5 +85,5 @@ class Validate {
     console.log(this.message);
 
     return this.val;
-  };
+  }
 }
