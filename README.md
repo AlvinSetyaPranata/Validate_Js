@@ -49,6 +49,7 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
 | url | null |
 | lowercase | null |
 | uppercase | null |
+| integer | null |
 
 
 ## How to Display Error Message
