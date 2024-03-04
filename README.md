@@ -44,8 +44,8 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
 | email  | null  |
 | number  | null  |
 | alphabet  | null  |
-| min:5  | null  |
-| max:13  | null  |
+| min:value  | null  |
+| max:value | null  |
 | url | null |
 | lowercase | null |
 | uppercase | null |
