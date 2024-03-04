@@ -10,6 +10,7 @@ class Message {
         url: "Url invalid",
         lowercase: "This field must be lowercase",
         uppercase: "This field must be uppercase",
+        integer: "This field must be integer",
       }
     }
   

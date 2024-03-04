@@ -21,6 +21,10 @@ class Validate {
     return val === val.toUpperCase()
   }
 
+  isInteger = (val) => {
+    return Number.isInteger(val)
+  }
+
   isUrl = (url) => {
     return /^(http|ftp)s?:\/\/((?=.{3,253}$)(localhost|(([^ ]){1,63}\.[^ ]+)))$/.test(url)
   }
@@ -61,6 +65,7 @@ class Validate {
       url: this.isUrl(this.val),
       lowercase: this.isLowerCase(this.val),
       uppercase: this.isUpperCase(this.val),
+      integer: this.isInteger(this.val),
     };
 
     types.forEach((type) => {
@@ -85,9 +90,6 @@ class Validate {
     this.errors[form.name] = this.error;
     this.message = this.error !== undefined ? message.messages[this.error] : "";
     this.displayMessage(form, this.message);
-
-    console.log(this.errors);
-    console.log(this.message);
 
     return this.val;
   }
