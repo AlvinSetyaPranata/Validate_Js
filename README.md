@@ -50,6 +50,7 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
 | lowercase | null |
 | uppercase | null |
 | integer | null |
+| size:kb | null |
 
 
 ## How to Display Error Message
