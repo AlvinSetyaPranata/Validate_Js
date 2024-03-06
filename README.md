@@ -51,6 +51,7 @@ validate.validation({form.name}, [{type validation1}, {type validation2}]);
 | uppercase | null |
 | integer | null |
 | size:kb | null |
+| ext:png\|jpg\|pdf\|your_extension | null |
 
 
 ## How to Display Error Message
