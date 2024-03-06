@@ -1,5 +1,5 @@
 class Message {
-    constructor(min, max) {
+    constructor(min, max, size) {
       this.messages = {
         required: "This field must be filled in",
         email: "Email format incorrect",
@@ -11,6 +11,7 @@ class Message {
         lowercase: "This field must be lowercase",
         uppercase: "This field must be uppercase",
         integer: "This field must be integer",
+        size: `Size file minimum ${size}kb`
       }
     }
   

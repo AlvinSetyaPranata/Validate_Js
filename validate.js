@@ -37,6 +37,10 @@ class Validate {
     return /^[0-9]*$/.test(val);
   }
 
+  sizeData = (form, max) => {
+    return parseInt(form.files[0].size / 1024) <= max;
+  }
+
   maxData(val, max) {
     return val.length < max;
   }
@@ -75,6 +79,9 @@ class Validate {
       } else if (type.includes("max")) {
         this.max = type.split(":")[1];
         this.result["max"] = this.maxData(this.val, this.max);
+      } else if (type.includes("size")) {
+        this.size = type.split(":")[1];
+        this.result["size"] = this.sizeData(form, this.size);
       }
 
       this.result[type] = this.validations[type];
@@ -84,7 +91,7 @@ class Validate {
       (key) => this.result[key] == false
     );
 
-    const message = new Message(this.min, this.max);
+    const message = new Message(this.min, this.max, this.size);
     message.setMessage(this.customMessage);
 
     this.errors[form.name] = this.error;
