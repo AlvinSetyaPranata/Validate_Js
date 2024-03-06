@@ -13,6 +13,7 @@ class Message {
         integer: "This field must be integer",
         size: `Size file minimum ${size}kb`,
         image: "File must be image extension",
+        ext: "Format file incorrect"
       }
     }
   

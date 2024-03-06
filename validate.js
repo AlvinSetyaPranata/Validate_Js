@@ -45,6 +45,11 @@ class Validate {
     return form.files[0].type.includes("image");
   }
 
+  extension = (form, types) => {
+    return types.split("|").filter(type => 
+      form.files[0].name.split(".").slice(-1).includes(type)).length === 1
+  } 
+
   maxData(val, max) {
     return val.length < max;
   }
@@ -87,6 +92,9 @@ class Validate {
       } else if (type.includes("size")) {
         this.size = type.split(":")[1];
         this.result["size"] = this.sizeData(form, this.size);
+      } else if (type.includes("ext")) {
+        this.formats = type.split(":")[1];
+        this.result["ext"] = this.extension(form, this.formats);
       }
 
       this.result[type] = this.validations[type];
