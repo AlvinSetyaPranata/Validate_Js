@@ -11,7 +11,8 @@ class Message {
         lowercase: "This field must be lowercase",
         uppercase: "This field must be uppercase",
         integer: "This field must be integer",
-        size: `Size file minimum ${size}kb`
+        size: `Size file minimum ${size}kb`,
+        image: "File must be image extension",
       }
     }
   

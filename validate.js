@@ -41,6 +41,10 @@ class Validate {
     return parseInt(form.files[0].size / 1024) <= max;
   }
 
+  isImage = (form) => {
+    return form.files[0].type.includes("image");
+  }
+
   maxData(val, max) {
     return val.length < max;
   }
@@ -70,6 +74,7 @@ class Validate {
       lowercase: this.isLowerCase(this.val),
       uppercase: this.isUpperCase(this.val),
       integer: this.isInteger(this.val),
+      image: this.isImage(form),
     };
 
     types.forEach((type) => {
