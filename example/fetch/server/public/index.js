@@ -1,4 +1,4 @@
-const validation = new FetchValidation(() => fetch('127.0.0.1:8000'))
+const validation = new FetchValidation(() => fetch('/ok'))
 const form = document.getElementById("register");
 
 
