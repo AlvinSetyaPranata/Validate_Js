@@ -5,99 +5,108 @@ class Validate {
     this.errors = {};
   }
 
-  isFill = (val) => {
-    return /\S+/.test(val);
-  }
+  isFill = (form) => {
+    return /\S+/.test(form.value);
+  };
 
-  isAlphabet = (val) => {
-    return /^[a-zA-z\s]+$/.test(val);
-  }
-  
-  isLowerCase = (val) => {
-    return val === val.toLowerCase()
-  }
+  isAlphabet = (form) => {
+    return /^[a-zA-z\s]+$/.test(form.value);
+  };
 
-  isUpperCase = (val) => {
-    return val === val.toUpperCase()
-  }
+  isLowerCase = (form) => {
+    return form.value === form.value.toLowerCase();
+  };
 
-  isInteger = (val) => {
-    return Number.isInteger(val)
-  }
+  isUpperCase = (form) => {
+    return form.value === form.value.toUpperCase();
+  };
 
-  isUrl = (url) => {
-    return /^(http|ftp)s?:\/\/((?=.{3,253}$)(localhost|(([^ ]){1,63}\.[^ ]+)))$/.test(url)
-  }
+  isInteger = (form) => {
+    return Number.isInteger(parseFloat(form.value));
+  };
 
-  isEmail = (val) => {
-    return this.name_domain.indexOf(val.split("@")[1]) == -1 ? false : true;
-  }
+  isUrl = (form) => {
+    return /^(http|ftp)s?:\/\/((?=.{3,253}$)(localhost|(([^ ]){1,63}\.[^ ]+)))$/.test(
+      form.value
+    );
+  };
 
-  isNumber = (val) => {
-    return /^[0-9]*$/.test(val);
-  }
+  isEmail = (form) => {
+    return this.name_domain.indexOf(form.value.split("@")[1]) == -1
+      ? false
+      : true;
+  };
+
+  isNumber = (form) => {
+    console.log("as");
+    return /^[0-9]*$/.test(form.value);
+  };
 
   sizeData = (form, max) => {
     return parseInt(form.files[0].size / 1024) <= max;
-  }
+  };
 
   isImage = (form) => {
     return form.files[0].type.includes("image");
-  }
+  };
 
   extension = (form, types) => {
-    return types.split("|").filter(type => 
-      form.files[0].name.split(".").slice(-1).includes(type)).length === 1
-  } 
+    return (
+      types
+        .split("|")
+        .filter((type) =>
+          form.files[0].name.split(".").slice(-1).includes(type)
+        ).length === 1
+    );
+  };
 
-  maxData(val, max) {
-    return val.length < max;
+  maxData(form, max) {
+    return form.value.length <= max;
   }
 
-  minData(val, min) {
-    return val.length > min;
+  minData(form, min) {
+    return form.value.length >= min;
   }
 
   displayMessage = (form, message) => {
     document.querySelector(`[data-message=${form.name}]`).innerText = message;
-  }
+  };
 
   check = () => {
     const checks = Object.values(this.errors);
     return checks.filter((check) => check !== undefined).length === 0;
-  }
+  };
 
   validation = (form, types) => {
-    this.val = form.value;
     this.result = {};
     this.validations = {
-      required: this.isFill(this.val),
-      email: this.isEmail(this.val),
-      number: this.isNumber(this.val),
-      alphabet: this.isAlphabet(this.val),
-      url: this.isUrl(this.val),
-      lowercase: this.isLowerCase(this.val),
-      uppercase: this.isUpperCase(this.val),
-      integer: this.isInteger(this.val),
-      image: this.isImage(form),
+      required: this.isFill,
+      email: this.isEmail,
+      number: this.isNumber,
+      alphabet: this.isAlphabet,
+      url: this.isUrl,
+      lowercase: this.isLowerCase,
+      uppercase: this.isUpperCase,
+      integer: this.isInteger,
+      image: this.isImage,
     };
 
     types.forEach((type) => {
-      if(type.includes("min")) {
+      if (type.includes("min")) {
         this.min = type.split(":")[1];
-        this.result["min"] = this.minData(this.val, this.min);
+        this.result["min"] = this.minData(form, this.min);
       } else if (type.includes("max")) {
         this.max = type.split(":")[1];
-        this.result["max"] = this.maxData(this.val, this.max);
+        this.result["max"] = this.maxData(form, this.max);
       } else if (type.includes("size")) {
         this.size = type.split(":")[1];
         this.result["size"] = this.sizeData(form, this.size);
       } else if (type.includes("ext")) {
         this.formats = type.split(":")[1];
         this.result["ext"] = this.extension(form, this.formats);
+      } else {
+        this.result[type] = this.validations[type](form);
       }
-
-      this.result[type] = this.validations[type];
     });
 
     this.error = Object.keys(this.result).find(
@@ -112,5 +121,5 @@ class Validate {
     this.displayMessage(form, this.message);
 
     return this.val;
-  }
+  };
 }
